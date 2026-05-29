@@ -1,0 +1,10 @@
+{
+  "name": "healthcare-prior-auth",
+  "private": true,
+  "scripts": {
+    "test": "vitest"
+  },
+  "devDependencies": {
+    "vitest": "^2.0.0"
+  }
+}

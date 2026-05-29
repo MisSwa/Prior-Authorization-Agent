@@ -38,6 +38,26 @@ Run these manually before merging to `main`.
 - Upload a PDF with more than one page
 - The extracted text in the chat message includes content from all pages, not just page 1
 
+### 7. Linting Passes
+
+- `ruff check .` exits 0 with no errors or warnings
+
+### 8. Formatting Passes
+
+- `ruff format --check .` exits 0 (no files need reformatting)
+
+### 9. Type Checking Passes
+
+- `mypy .` exits 0 with no type errors reported
+
+### 10. Python Unit Tests Pass
+
+- `pytest` exits 0; all tests in `tests/test_pdf_utils.py` and `tests/test_state.py` pass
+
+### 11. Vitest Tests Pass
+
+- `npm test` exits 0; all tests in `tests/smoke.test.js` pass
+
 ## What This Phase Does Not Validate
 
 - Agent reasoning or Claude API responses (Phase 2)
@@ -47,4 +67,4 @@ Run these manually before merging to `main`.
 
 ## Merge Criteria
 
-All 6 checks above pass manually. No Python exceptions appear in the terminal during normal use. Branch is merged to `main`.
+All 11 checks above pass. No Python exceptions appear in the terminal during normal use. Branch is merged to `main`.

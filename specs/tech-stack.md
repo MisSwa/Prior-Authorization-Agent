@@ -48,6 +48,46 @@
 
 Streamlit invokes the LangGraph graph directly in-process. There is no REST API layer between the UI and the agent graph. This eliminates deployment complexity for the initial versions. If a server layer is needed later (e.g., for async job queues or multi-user scaling), it can be added without changing the graph logic.
 
+## Code Quality & Testing
+
+### Linting & Formatting: Ruff
+
+- **Library:** `ruff`
+- **Responsibilities:** Lint and auto-format all Python source files
+- **Commands:** `ruff check .` (lint), `ruff format .` (format)
+- **Rationale:** Single tool replaces flake8, isort, and black. Fast enough to run on every save and in CI without friction.
+
+### Type Checking: mypy
+
+- **Library:** `mypy`
+- **Responsibilities:** Static type analysis of all Python modules; catches type mismatches before runtime
+- **Command:** `mypy .`
+- **Rationale:** The typed `AuthState` schema in LangGraph depends on correct types flowing through every node. mypy enforces this at development time.
+
+### Python Unit Tests: pytest
+
+- **Library:** `pytest`
+- **Responsibilities:** Unit tests for Python modules (`modules/pdf_utils.py`, `modules/state.py`) and LangGraph node logic
+- **Command:** `pytest`
+- **Rationale:** Each LangGraph node is a pure function over state, making it straightforward to test in isolation without running the full Streamlit app.
+
+### JS/UI Validation Tests: Vitest
+
+- **Library:** `vitest`
+- **Responsibilities:** Validation tests for the application, runnable via `npm test`
+- **Script:** Defined in `package.json` as `"test": "vitest"`
+- **Rationale:** Fast, ESM-native test runner with minimal configuration. Tests live alongside the source they validate and can be run in watch mode during development.
+
+### Pre-commit Hooks: pre-commit
+
+- **Library:** `pre-commit`
+- **Configuration:** `.pre-commit-config.yaml` at the repository root
+- **Hooks run on every commit:**
+  - `ruff check` — fail on lint errors
+  - `ruff format --check` — fail if formatting is inconsistent
+  - `mypy` — fail on type errors
+- **Rationale:** Prevents unformatted or type-unsafe code from entering the repository without requiring developers to remember to run checks manually.
+
 ## Dependency Summary
 
 | Component            | Package                  |
@@ -58,3 +98,8 @@ Streamlit invokes the LangGraph graph directly in-process. There is no REST API 
 | LLM model            | `claude-sonnet-4-6`      |
 | PDF parsing          | `pdfplumber`             |
 | Tracing              | `langsmith`              |
+| Linting & formatting | `ruff`                   |
+| Type checking        | `mypy`                   |
+| Python tests         | `pytest`                 |
+| JS/UI tests          | `vitest`                 |
+| Pre-commit hooks     | `pre-commit`             |

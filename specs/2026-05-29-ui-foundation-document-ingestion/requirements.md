@@ -50,6 +50,39 @@ modules/
 | Stub replies | Hardcoded echo when user types | Validates the chat input → message history → display loop without requiring agents |
 | Module structure | `app.py` + `modules/` subdirectory | Avoids a God-file from the start; extraction logic is unit-testable in isolation |
 
+## Code Quality & Testing
+
+### Tooling
+
+| Tool | Role | Command |
+|------|------|---------|
+| `ruff` | Lint and auto-format all Python source | `ruff check .` / `ruff format .` |
+| `mypy` | Static type checking for all Python modules | `mypy .` |
+| `pytest` | Unit tests for Python modules | `pytest` |
+| `vitest` | JS/UI validation tests | `npm test` |
+| `pre-commit` | Enforce ruff and mypy on every commit | `pre-commit install` |
+
+### Structure
+
+```
+tests/
+  __init__.py
+  test_pdf_utils.py   # unit tests for extract_text()
+  test_state.py       # unit tests for constants and init_session_state()
+  smoke.test.js       # Vitest placeholder for future UI validation tests
+pyproject.toml        # ruff and mypy configuration
+.pre-commit-config.yaml
+```
+
+### Requirements
+
+- All Python source files pass `ruff check .` with no errors
+- All Python source files are formatted consistently per `ruff format --check .`
+- `mypy .` reports no type errors
+- `pytest` passes all tests in `tests/`
+- `npm test` passes all Vitest tests
+- `pre-commit install` is run once after cloning so hooks fire automatically
+
 ## Out of Scope
 
 - Agent nodes or LangGraph graph

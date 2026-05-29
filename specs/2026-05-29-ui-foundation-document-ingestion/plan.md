@@ -35,3 +35,21 @@
 
 ### 7. Documentation
 - Add a `README.md` section (or update existing) with setup and run instructions: `pip install -r requirements.txt` then `streamlit run app.py`
+
+### 8. Code Quality & Testing Setup
+- Add dev dependencies to `requirements.txt`: `ruff`, `mypy`, `pytest`, `pre-commit`
+- Create `pyproject.toml` with `[tool.ruff]` (line length, target version, lint rules) and `[tool.mypy]` (python version, ignore missing imports) sections
+- Create `.pre-commit-config.yaml` with hooks: `ruff` (lint), `ruff-format --check` (formatting), `mypy` (type check)
+- Create `tests/__init__.py` (empty)
+- Create `tests/test_pdf_utils.py` with unit tests for `extract_text()`:
+  - Single-page extraction returns correct text
+  - Multi-page extraction concatenates all pages
+  - Pages returning `None` are treated as empty strings
+  - Empty PDF raises `ValueError`
+- Create `tests/test_state.py` with unit tests for `modules/state.py`:
+  - Constants have expected string values
+  - `init_session_state()` sets all three keys to their defaults when absent
+  - `init_session_state()` does not overwrite keys that are already present
+- Create `tests/smoke.test.js` as a Vitest placeholder for future UI validation tests
+- Run `pre-commit install` to activate hooks locally
+- Confirm `ruff check .`, `mypy .`, `pytest`, and `npm test` all exit cleanly
