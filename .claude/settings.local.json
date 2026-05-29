@@ -1,0 +1,7 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(git init && git add . && git commit -m \"$\\(cat <<'EOF'\nInitial project structure: specs and README\n\nCo-Authored-By: Claude Sonnet 4.6 <noreply@anthropic.com>\nEOF\n\\)\")"
+    ]
+  }
+}
