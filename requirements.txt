@@ -1,8 +1,13 @@
 streamlit>=1.35.0
 pdfplumber>=0.11.0
+langgraph>=0.2.0
+langchain-anthropic>=0.2.0
+langsmith>=0.1.0
+python-dotenv>=1.0.0
 
 # dev / code quality
 ruff>=0.4.0
 mypy>=1.10.0
 pytest>=8.0.0
 pre-commit>=3.7.0
+fpdf2>=2.7.0
