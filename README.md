@@ -2,6 +2,16 @@
 
 An AI-powered tool that helps healthcare teams get insurance approvals faster — so patients spend less time waiting and more time receiving care.
 
+## At a glance
+
+| | |
+|---|---|
+| **Problem** | Prior authorization requests take coordinators hours of manual chart-vs-policy review |
+| **What it does** | Extracts clinical facts, checks each coverage criterion, recommends APPROVED / DENIED / PENDED with cited rationale |
+| **How** | Sequential LangGraph pipeline on Claude with a guardrail step and full audit trail |
+| **Safety** | Low-confidence or incomplete cases are routed to review; a human always makes the final decision |
+| **Stack** | Python · LangGraph · Claude (langchain-anthropic) · Streamlit · pdfplumber · LangSmith · pytest |
+
 ---
 
 ## What Is This?
